@@ -50,7 +50,7 @@
                             (t/do-report {:type :end-test-ns :ns ns-obj})
                             @t/*report-counters*)]
            (if junit-output-to
-             (run-tests-with-junit-reporter run-tests* junit-output-to)
+             (run-tests-with-junit-reporter run-tests* (io/file junit-output-to (str (name ns) ".xml")))
              (run-tests*))))))))
 
 ;;; This prevents a name collision WARNING between the test task and
@@ -71,7 +71,7 @@
 
   [n namespaces NAMESPACE #{sym} "The set of namespace symbols to run tests in."
    f filters    EXPR      #{edn} "The set of expressions to use to filter namespaces."
-   j junit-output-to JUNIT-OUT str "The filename for the junit reporter output"]
+   j junit-output-to JUNIT-OUT str "The directory where a junit formatted report will be generated for each ns"]
 
   (let [worker-pods (pod/pod-pool (update-in (core/get-env) [:dependencies] into pod-deps) :init init)]
     (core/cleanup (worker-pods :shutdown))
@@ -86,6 +86,7 @@
           (let [filterf `(~'fn [~'%] (and ~@filters))
                 summary (pod/with-eval-in worker-pod
                           (doseq [ns '~namespaces] (require ns))
+                          (when ~junit-output-to (io/make-parents ~junit-output-to "foo"))
                           (let [ns-results (map (partial test-ns* ~filterf ~junit-output-to) '~namespaces)]
                             (-> (reduce (partial merge-with +) ns-results)
                                 (assoc :type :summary)
