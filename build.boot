@@ -7,12 +7,12 @@
 (require '[adzerk.bootlaces :refer :all]
          '[adzerk.boot-test :refer [test]])
 
-(def +version+ "1.0.4")
+(def +version+ "1.0.5-SNAPSHOT")
 
 (bootlaces! +version+)
 
 (task-options!
- pom  {:project     'adzerk/boot-test
+ pom  {:project     'nberger/boot-test
        :version     +version+
        :description "Run some tests in boot!"
        :url         "https://github.com/adzerk/boot-test"
