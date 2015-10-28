@@ -12,6 +12,7 @@
 (bootlaces! +version+)
 
 (task-options!
+ push {:ensure-branch nil}
  pom  {:project     'nberger/boot-test
        :version     +version+
        :description "Run some tests in boot!"
