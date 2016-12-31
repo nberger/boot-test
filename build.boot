@@ -19,3 +19,6 @@
                      "http://www.eclipse.org/legal/epl-v10.html"}}
  test {:namespaces '#{adzerk.boot-test.test}
        :junit-output-to "junit-out"})
+
+;; deps task to cache dependencies in CircleCI
+(deftask deps [])
