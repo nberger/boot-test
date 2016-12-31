@@ -17,7 +17,9 @@
        :scm         {:url "https://github.com/adzerk/boot-test"}
        :license     {"Eclipse Public License"
                      "http://www.eclipse.org/legal/epl-v10.html"}}
- test {:namespaces '#{adzerk.boot-test.test}
+ test {:namespaces '#{adzerk.boot-test.test
+                      adzerk.boot-test.test2
+                      adzerk.boot-test.test3}
        :junit-output-to "junit-out"})
 
 ;; deps task to cache dependencies in CircleCI
