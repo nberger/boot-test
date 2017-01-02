@@ -21,4 +21,4 @@ dependencies:
 test:
   override:
     - boot test
-    - mv junit-out $CIRCLE_TEST_REPORTS/boot-test
+    - mv target/junit-out $CIRCLE_TEST_REPORTS/boot-test
