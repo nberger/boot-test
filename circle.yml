@@ -20,4 +20,4 @@ dependencies:
 
 test:
   override:
-    - boot test
+    - boot test -j $CIRCLE_TEST_REPORTS/boot-test
